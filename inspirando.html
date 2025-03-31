@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevDuo | Soluções Hacker-Proof</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --neon-purple: #d300c5;
+            --dark-bg: #0d0221;
+            --darker-bg: #02010a;
+            --cyber-text: #b5b5b5;
+            --cyber-yellow: #f9f002;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: var(--cyber-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 42, 109, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(5, 217, 232, 0.15) 0%, transparent 20%);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Efeito de glitch nos títulos */
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-pink); }
+            25% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-blue); }
+            50% { text-shadow: 2px 0 var(--neon-purple), -2px 0 var(--neon-yellow); }
+            75% { text-shadow: -2px 0 var(--neon-yellow), 2px 0 var(--neon-purple); }
+            100% { text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-pink); }
+        }
+        
+        /* Estilo Cyberpunk para a seção Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 45%, rgba(5, 217, 232, 0.1) 50%, transparent 55%),
+                linear-gradient(transparent 45%, rgba(255, 42, 109, 0.1) 50%, transparent 55%);
+            background-size: 5px 5px;
+            pointer-events: none;
+            animation: scanlines 2s linear infinite;
+        }
+        
+        @keyframes scanlines {
+            from { background-position: 0 0; }
+            to { background-position: 0 10px; }
+        }
+        
+        .hero h1 {
+            color: var(--neon-blue);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-blue);
+            animation: glitch 2s infinite;
+        }
+        
+        .hero p {
+            color: var(--cyber-text);
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        .team-showcase {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .team-member {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(13, 2, 33, 0.7);
+            border: 1px solid var(--neon-pink);
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 42, 109, 0.6);
+        }
+        
+        .team-member::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border: 1px solid var(--neon-blue);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .team-member:hover::before {
+            opacity: 1;
+        }
+        
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 20px;
+        }
+        
+        .team-member h3 {
+            color: var(--neon-pink);
+            margin-bottom: 5px;
+            font-size: 1.8rem;
+        }
+        
+        .team-member p {
+            color: var(--neon-blue);
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .team-member ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .team-member ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .team-member ul li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--neon-purple);
+            font-weight: bold;
+        }
+        
+        /* Estilo Cyberpunk para a seção de Serviços */
+        .services {
+            padding: 80px 0;
+            background: var(--darker-bg);
+            border-bottom: 1px solid var(--neon-purple);
+        }
+        
+        .services h2 {
+            text-align: center;
+            color: var(--neon-purple);
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: rgba(2, 1, 10, 0.7);
+            border: 1px solid var(--neon-blue);
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(5, 217, 232, 0.5);
+        }
+        
+        .service-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.1), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .service-card:hover::after {
+            left: 100%;
+        }
+        
+        .service-card h3 {
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--neon-pink);
+            padding-bottom: 10px;
+        }
+        
+        .service-card p {
+            color: var(--cyber-text);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .service-card ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        
+        .service-card ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        
+        .service-card ul li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            font-size: 0.8rem;
+        }
+        
+        .expert {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--dark-bg);
+            color: var(--neon-yellow);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            border: 1px solid var(--neon-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Estilo Cyberpunk para a seção de Projetos */
+        .projects {
+            padding: 80px 0;
+            background: var(--dark-bg);
+            border-bottom: 1px solid var(--neon-pink);
+        }
+        
+        .projects h2 {
+            text-align: center;
+            color: var(--neon-pink);
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+        
+        .project-carousel {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .project-card {
+            min-width: 300px;
+            scroll-snap-align: start;
+            background: rgba(2, 1, 10, 0.7);
+            border: 1px solid var(--neon-purple);
+            transition: all 0.3s ease;
+            flex: 0 0 auto;
+            width: 80%;
+            max-width: 600px;
+        }
+        
+        .project-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(211, 0, 197, 0.5);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--neon-purple);
+            filter: grayscale(50%) contrast(120%);
+            transition: filter 0.3s ease;
+        }
+        
+        .project-card:hover img {
+            filter: grayscale(0%) contrast(100%);
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-info h3 {
+            color: var(--neon-purple);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .contributions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .contributions > div {
+            flex: 1;
+        }
+        
+        .contributions h4 {
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--neon-blue);
+            padding-bottom: 5px;
+        }
+        
+        .contributions ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .contributions ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .contributions ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+        }
+        
+        /* Estilo Cyberpunk para o fluxo de trabalho */
+        .workflow {
+            padding: 80px 0;
+            background: var(--darker-bg);
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        
+        .workflow h2 {
+            text-align: center;
+            color: var(--neon-blue);
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .step {
+            background: rgba(13, 2, 33, 0.7);
+            border: 1px solid var(--neon-pink);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 42, 109, 0.3);
+        }
+        
+        .step h3 {
+            color: var(--neon-pink);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .step p {
+            color: var(--cyber-text);
+            font-weight: 300;
+        }
+        
+        .step::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid var(--neon-blue);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .step:hover::before {
+            opacity: 1;
+        }
+        
+        .collaboration-tools {
+            background: rgba(2, 1, 10, 0.7);
+            border: 1px solid var(--neon-purple);
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .collaboration-tools h3 {
+            color: var(--neon-purple);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .tools {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tools > div {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .tools h4 {
+            color: var(--neon-blue);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tools ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        
+        .tools ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .tools ul li::before {
+            content: "//";
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+        }
+        
+        /* Estilo Cyberpunk para o rodapé */
+        footer {
+            padding: 60px 0 30px;
+            background: linear-gradient(to top, var(--darker-bg) 0%, transparent 100%);
+            text-align: center;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-pink), var(--neon-blue), var(--neon-purple), transparent);
+        }
+        
+        footer h2 {
+            color: var(--neon-blue);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        footer p {
+            color: var(--cyber-text);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background: rgba(5, 217, 232, 0.1);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.4), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn.secondary {
+            color: var(--neon-pink);
+            border-color: var(--neon-pink);
+        }
+        
+        .btn.secondary:hover {
+            background: rgba(255, 42, 109, 0.1);
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+        
+        .btn.secondary::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 42, 109, 0.4), transparent);
+        }
+        
+        .contact-info {
+            margin-top: 40px;
+        }
+        
+        .contact-info p {
+            color: var(--cyber-text);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Efeitos de terminal */
+        .terminal-effect {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--neon-blue);
+            font-family: monospace;
+            color: var(--neon-blue);
+            padding: 10px;
+            font-size: 0.8rem;
+            overflow: hidden;
+            z-index: 1000;
+            display: none; /* Pode ser ativado com JavaScript */
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .team-showcase {
+                flex-direction: column;
+            }
+            
+            .contributions {
+                flex-direction: column;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <h1>Transformamos ideias em soluções digitais completas</h1>
+            <p>Dupla especializada cobrindo todas as áreas do desenvolvimento web e mobile</p>
+            
+            <div class="team-showcase">
+                <div class="team-member">
+                    <img src="backend-dev.jpg" alt="João Silva - Backend & BD">
+                    <h3>João Silva</h3>
+                    <p>Backend & Banco de Dados</p>
+                    <ul>
+                        <li>Arquitetura de sistemas</li>
+                        <li>Modelagem de dados</li>
+                        <li>APIs robustas</li>
+                        <li>Segurança e infraestrutura</li>
+                    </ul>
+                </div>
+                
+                <div class="team-member">
+                    <img src="frontend-dev.jpg" alt="Maria Souza - Frontend & UX/UI">
+                    <h3>Maria Souza</h3>
+                    <p>Frontend & UX/UI</p>
+                    <ul>
+                        <li>Interfaces intuitivas</li>
+                        <li>Experiência do usuário</li>
+                        <li>Design responsivo</li>
+                        <li>Performance frontend</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>Nossos Serviços Integrados</h2>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Banco de Dados Completo</h3>
+                    <p>Projeto, implementação e otimização de bancos de dados relacionais e NoSQL</p>
+                    <ul>
+                        <li>Modelagem ER avançada</li>
+                        <li>Migração de dados segura</li>
+                        <li>Backups automatizados</li>
+                        <li>Replicação e alta disponibilidade</li>
+                    </ul>
+                    <span class="expert">João</span>
+                </div>
+                
+                <div class="service-card">
+                    <h3>Interfaces Modernas</h3>
+                    <p>Design e desenvolvimento de interfaces focadas na experiência do usuário</p>
+                    <ul>
+                        <li>Prototipação e wireframing</li>
+                        <li>Design systems completos</li>
+                        <li>Animações e microinterações</li>
+                        <li>Testes de usabilidade</li>
+                    </ul>
+                    <span class="expert">Maria</span>
+                </div>
+                
+                <div class="service-card">
+                    <h3>Manutenção Contínua</h3>
+                    <p>Pacotes de suporte pós-implantação para seu projeto</p>
+                    <ul>
+                        <li>Atualizações de segurança</li>
+                        <li>Monitoramento 24/7</li>
+                        <li>Relatórios de performance</li>
+                        <li>Scalability consulting</li>
+                    </ul>
+                    <span class="expert">Ambos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects">
+        <div class="container">
+            <h2>Projetos em Destaque</h2>
+            
+            <div class="project-carousel">
+                <div class="project-card">
+                    <img src="project-ecommerce.jpg" alt="Sistema E-commerce">
+                    <div class="project-info">
+                        <h3>Plataforma E-commerce</h3>
+                        <div class="contributions">
+                            <div>
+                                <h4>Backend</h4>
+                                <ul>
+                                    <li>BD otimizado para 10k transações/dia</li>
+                                    <li>API de pagamentos integrada</li>
+                                    <li>Sistema de recomendação</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Frontend</h4>
+                                <ul>
+                                    <li>Checkout em 3 passos</li>
+                                    <li>Design adaptado para mobile</li>
+                                    <li>Animações de carrinho</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="project-saas.jpg" alt="Sistema SaaS">
+                    <div class="project-info">
+                        <h3>Sistema de Gestão SaaS</h3>
+                        <div class="contributions">
+                            <div>
+                                <h4>Backend</h4>
+                                <ul>
+                                    <li>Arquitetura multi-tenant</li>
+                                    <li>Backup incremental diário</li>
+                                    <li>Autenticação JWT</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Frontend</h4>
+                                <ul>
+                                    <li>Dashboard interativa</li>
+                                    <li>Component library custom</li>
+                                    <li>Fluxo de onboarding</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow">
+        <div class="container">
+            <h2>Nosso Processo Integrado</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <h3>1. Requisitos</h3>
+                    <p>Reunião conjunta para entender necessidades técnicas e de UX</p>
+                </div>
+                <div class="step">
+                    <h3>2. Projeto</h3>
+                    <p>Maria cria wireframes enquanto João modela o banco de dados</p>
+                </div>
+                <div class="step">
+                    <h3>3. Desenvolvimento</h3>
+                    <p>Implementação paralela com checkpoints de integração</p>
+                </div>
+                <div class="step">
+                    <h3>4. Entrega</h3>
+                    <p>Deploy gerenciado com plano de manutenção</p>
+                </div>
+            </div>
+            
+            <div class="collaboration-tools">
+                <h3>Ferramentas que usamos</h3>
+                <div class="tools">
+                    <div>
+                        <h4>Backend/BD</h4>
+                        <ul>
+                            <li>Node.js, Python, Java</li>
+                            <li>PostgreSQL, MongoDB</li>
+                            <li>Docker, AWS, Firebase</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Frontend/UX</h4>
+                        <ul>
+                            <li>React, Vue, Angular</li>
+                            <li>Figma, Adobe XD</li>
+                            <li>Storybook, Sass</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2>Pronto para levar seu projeto ao próximo nível?</h2>
+            <p>Temos a combinação perfeita de expertise técnica e design thinking</p>
+            
+            <div class="cta-buttons">
+                <a href="#contact" class="btn">Fale Conosco</a>
+                <a href="#projects" class="btn secondary">Veja Mais Projetos</a>
+            </div>
+            
+            <div class="contact-info">
+                <p>Email: contato@devduo.com.br</p>
+                <p>Telefone: (11) 98765-4321</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="terminal-effect" id="terminal">
+        <!-- Efeito de terminal pode ser implementado com JavaScript -->
+    </div>
+
+    <script>
+        // Efeitos interativos podem ser adicionados aqui
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efeito de digitação para algum elemento
+            // Animação de hover mais elaborada
+            // Ativação do terminal
+        });
+    </script>
+</body>
+</html>
